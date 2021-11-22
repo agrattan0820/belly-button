@@ -1,0 +1,19 @@
+{
+  "name": "icoalt",
+  "version": "1.0.0",
+  "description": "Adds accessibility labels to social links that don't have one!",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GameDog9988/IcoAlt.git"
+  },
+  "author": "Alexander Grattan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GameDog9988/IcoAlt/issues"
+  },
+  "homepage": "https://github.com/GameDog9988/IcoAlt#readme"
+}

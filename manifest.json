@@ -19,5 +19,14 @@
    "icons": {
     "16": "/images/favicon-16x16.png",
     "32": "/images/favicon-32x32.png"
-  }
+  },
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ]
 }
