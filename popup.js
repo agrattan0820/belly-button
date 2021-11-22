@@ -1,3 +1,18 @@
+//  "content_scripts": [
+//   {
+//    "matches": ["<all_urls>"],
+//    "js": ["script.js"],
+//    "css": ["styles.css"]
+//   }
+//  ],
+// "action": {
+//   "default_popup": "popup.html",
+//   "default_icon": {
+//   "16": "/images/favicon-16x16.png",
+//   "32": "/images/favicon-32x32.png"
+//   }
+// },
+
 const companyArray = [
   {
     search: "youtube",
@@ -34,6 +49,8 @@ const companyArray = [
 ];
 
 function addTitle(element) {
+  console.log("Ran!");
+
   // Check if element is an anchor tag
   if (element.nodeName === "A") {
     if (element.hasChildNodes()) {
@@ -48,6 +65,7 @@ function addTitle(element) {
         companyArray.forEach((company) => {
           if (element.href.search(company.search) !== -1) {
             element.setAttribute("aria-label", company.title);
+            console.log("Set aria-label!");
           }
         });
       }
@@ -57,6 +75,7 @@ function addTitle(element) {
         companyArray.forEach((company) => {
           if (element.href.search(company.search) !== -1) {
             element.setAttribute("aria-label", company.title);
+            console.log("Set aria-label!");
           }
         });
       }
