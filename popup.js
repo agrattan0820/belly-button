@@ -13,78 +13,175 @@
 //   }
 // },
 
-const companyArray = [
-  {
-    search: "youtube",
-    title: "YouTube",
-  },
-  {
-    search: "youtu.be",
-    title: "YouTube",
-  },
-  {
-    search: "discord",
-    title: "Discord",
-  },
-  {
-    search: "instagram",
-    title: "Instagram",
-  },
-  {
-    search: "github",
-    title: "GitHub",
-  },
-  {
-    search: "facebook",
-    title: "Facebook",
-  },
-  {
-    search: "twitter",
-    title: "Twitter",
-  },
-  {
-    search: "pinterest",
-    title: "Pinterest",
-  },
-];
+const titleButton = document.querySelector("#titleButton");
+const inspectButton = document.querySelector("#inspectButton");
 
-function addTitle(element) {
-  console.log("Ran!");
-
-  // Check if element is an anchor tag
-  if (element.nodeName === "A") {
-    if (element.hasChildNodes()) {
-      // Convert nodeList into array which we can use array methods on
-      const nodeArray = Array.from(element.childNodes);
-
-      // If the element doesn't have a title or text within it, add the company title
-      if (
-        !element["aria-label"] &&
-        !nodeArray.some((child) => child.nodeType === 3)
-      ) {
-        companyArray.forEach((company) => {
-          if (element.href.search(company.search) !== -1) {
-            element.setAttribute("aria-label", company.title);
-            console.log("Set aria-label!");
-          }
-        });
-      }
-    } else {
-      // An empty anchor tag, might as well add the title
-      if (!element["aria-label"]) {
-        companyArray.forEach((company) => {
-          if (element.href.search(company.search) !== -1) {
-            element.setAttribute("aria-label", company.title);
-            console.log("Set aria-label!");
-          }
-        });
-      }
-    }
-  } else {
-    if (element.hasChildNodes()) {
-      element.childNodes.forEach(addTitle);
-    }
-  }
+async function getCurrentTab() {
+  let queryOptions = { active: true, currentWindow: true };
+  let [tab] = await chrome.tabs.query(queryOptions);
+  return tab;
 }
 
-addTitle(document.body);
+function hover() {
+  let tooltip;
+  let exitButton;
+
+  tooltip = document.createElement("div");
+  exitButton = document.createElement("button");
+
+  let buttons = document.getElementsByTagName("button");
+  let anchors = document.getElementsByTagName("a");
+
+  buttons = [...buttons];
+  anchors = [...anchors];
+
+  tooltip.id = "tooltip";
+
+  tooltip.style.display = "none";
+  tooltip.style.alignItems = "center";
+  tooltip.style.justifyContent = "center";
+  tooltip.style.position = "fixed";
+  tooltip.style.backgroundColor = "papayawhip";
+  tooltip.style.borderRadius = "20px";
+  tooltip.style.width = "200px";
+  tooltip.style.height = "100px";
+  tooltip.style.zIndex = "10000";
+  tooltip.style.boxShadow = `
+  2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
+  6px 6px 10px rgba(0, 0, 0, 0.035),
+  14.5px 14.5px 24.1px rgba(0, 0, 0, 0.046),
+  48px 48px 80px rgba(0, 0, 0, 0.07)
+`;
+  tooltip.textContent = "Hello there";
+
+  exitButton.id = "exitButton";
+
+  exitButton.style.position = "fixed";
+  exitButton.style.top = "8px";
+  exitButton.style.right = "16px";
+  exitButton.style.backgroundColor = "papayawhip";
+  exitButton.style.borderRadius = "10px";
+  exitButton.style.width = "125px";
+  exitButton.style.height = "50px";
+  exitButton.style.zIndex = "10000";
+  exitButton.style.border = "none";
+  exitButton.style.outline = "none";
+  exitButton.style.boxShadow = `
+  2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
+  6px 6px 10px rgba(0, 0, 0, 0.035),
+  14.5px 14.5px 24.1px rgba(0, 0, 0, 0.046),
+  48px 48px 80px rgba(0, 0, 0, 0.07)
+`;
+  exitButton.textContent = "Exit Inspect";
+
+  buttons.forEach((button, i) => {
+    button.onmouseover = function (e) {
+      tooltip.style.display = "flex";
+      tooltip.innerHTML = `
+    <div>Button ${i}</div>`;
+      console.log(e.srcElement.getAttribute("aria-label"));
+    };
+
+    button.onmouseout = function (e) {
+      tooltip.style.display = "none";
+    };
+  });
+
+  window.onmousemove = function (e) {
+    // tooltip.style.display = "block";
+    let x = e.clientX,
+      y = e.clientY;
+    tooltip.style.top = y + 20 + "px";
+    tooltip.style.left = x + 20 + "px";
+  };
+
+  anchors.forEach((link, i) => {
+    link.onmouseover = function (e) {
+      tooltip.style.display = "flex";
+      tooltip.innerHTML = `
+    <div>Link ${i}</div>`;
+      console.log(e.srcElement.getAttribute("aria-label"));
+    };
+
+    link.onmouseout = function (e) {
+      tooltip.style.display = "none";
+    };
+  });
+
+  window.onmousemove = function (e) {
+    // tooltip.style.display = "block";
+    let x = e.clientX,
+      y = e.clientY;
+    tooltip.style.top = y + 20 + "px";
+    tooltip.style.left = x + 20 + "px";
+  };
+
+  exitButton.addEventListener("click", () => {
+    tooltip.remove();
+    exitButton.remove();
+  });
+
+  document.body.append(tooltip);
+  document.body.append(exitButton);
+}
+
+function addConfirmation() {
+  let confirmBox;
+
+  confirmBox = document.createElement("div");
+
+  confirmBox.style.display = "flex";
+  confirmBox.style.alignItems = "center";
+  confirmBox.style.justifyContent = "center";
+  confirmBox.style.position = "fixed";
+  confirmBox.style.backgroundColor = "mediumseagreen";
+  confirmBox.style.borderRadius = "20px";
+  confirmBox.style.top = "8px";
+  confirmBox.style.left = "50%";
+  confirmBox.style.transform = "translate(-50%)";
+  confirmBox.style.width = "125px";
+  confirmBox.style.height = "50px";
+  confirmBox.style.zIndex = "10000";
+  confirmBox.style.fontWeight = "bold";
+  confirmBox.style.boxShadow = `
+  2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
+  6px 6px 10px rgba(0, 0, 0, 0.035),
+  14.5px 14.5px 24.1px rgba(0, 0, 0, 0.046),
+  48px 48px 80px rgba(0, 0, 0, 0.07)
+`;
+  confirmBox.style.transitionProperty = "opacity";
+  confirmBox.style.transitionDuration = "150ms";
+  confirmBox.style.transitionTimingFunction = "cubic-bezier(0.4, 0, 0.2, 1);";
+  confirmBox.textContent = "Added! ✔️";
+
+  document.body.append(confirmBox);
+
+  setTimeout(() => {
+    confirmBox.style.opacity = "0";
+    setTimeout(() => {
+      confirmBox.remove();
+    }, 200);
+  }, 3000);
+}
+
+titleButton.addEventListener("click", async () => {
+  const tab = await getCurrentTab();
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: ["addTitle.js"],
+  });
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: addConfirmation,
+  });
+  window.close();
+});
+
+inspectButton.addEventListener("click", async () => {
+  const tab = await getCurrentTab();
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: hover,
+  });
+  window.close();
+});

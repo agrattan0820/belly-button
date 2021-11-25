@@ -1,1 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
+body {
+  width: 100%;
+  background-color: papayawhip;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  width: 400px;
+  padding: 1rem;
+}
+
+#toolbar {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#toolbar button {
+  padding: 0.5rem 1rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background-color: mediumseagreen;
+  cursor: pointer;
+  font-weight: bold;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  box-shadow: 2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
+    6px 6px 10px rgba(0, 0, 0, 0.035), 14.5px 14.5px 24.1px rgba(0, 0, 0, 0.046),
+    48px 48px 80px rgba(0, 0, 0, 0.07);
+}
+
+#toolbar button:hover {
+  transform: scale(1.05);
+}
+
+.title {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  padding: 0;
+}
