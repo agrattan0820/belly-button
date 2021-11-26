@@ -16,8 +16,6 @@ let anchors = document.getElementsByTagName("a");
 buttons = [...buttons];
 anchors = [...anchors];
 
-console.log(buttons);
-
 tooltip.id = "tooltip";
 
 tooltip.style.display = "none";

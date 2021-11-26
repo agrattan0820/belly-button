@@ -40,12 +40,14 @@ function hover() {
   tooltip.style.display = "none";
   tooltip.style.alignItems = "center";
   tooltip.style.justifyContent = "center";
+  tooltip.style.flexDirection = "column";
   tooltip.style.position = "fixed";
   tooltip.style.backgroundColor = "papayawhip";
   tooltip.style.borderRadius = "20px";
   tooltip.style.width = "200px";
   tooltip.style.height = "100px";
   tooltip.style.zIndex = "10000";
+  tooltip.style.color = "black";
   tooltip.style.boxShadow = `
   2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
   6px 6px 10px rgba(0, 0, 0, 0.035),
@@ -64,6 +66,7 @@ function hover() {
   exitButton.style.width = "125px";
   exitButton.style.height = "50px";
   exitButton.style.zIndex = "10000";
+  exitButton.style.color = "black";
   exitButton.style.border = "none";
   exitButton.style.outline = "none";
   exitButton.style.boxShadow = `
@@ -76,31 +79,57 @@ function hover() {
 
   buttons.forEach((button, i) => {
     button.onmouseover = function (e) {
-      tooltip.style.display = "flex";
+      let element;
+
+      function findButton(element) {
+        if (element.nodeName !== "BUTTON") {
+          return findAnchor(element.parentElement);
+        } else if (element.nodeName === "BODY") {
+          return false;
+        } else {
+          return element;
+        }
+      }
+
+      element = findButton(e.srcElement);
+
       tooltip.innerHTML = `
-    <div>Button ${i}</div>`;
-      console.log(e.srcElement.getAttribute("aria-label"));
+    <div>Button ${i}</div>
+    <div>aria-label: ${element.getAttribute("aria-label") ? "✔️" : "❌"}</div>`;
+      console.log(element.getAttribute("aria-label"));
     };
+
+    tooltip.style.display = "flex";
 
     button.onmouseout = function (e) {
       tooltip.style.display = "none";
     };
   });
 
-  window.onmousemove = function (e) {
-    // tooltip.style.display = "block";
-    let x = e.clientX,
-      y = e.clientY;
-    tooltip.style.top = y + 20 + "px";
-    tooltip.style.left = x + 20 + "px";
-  };
-
   anchors.forEach((link, i) => {
     link.onmouseover = function (e) {
-      tooltip.style.display = "flex";
+      let element;
+
+      function findAnchor(element) {
+        if (element.nodeName !== "A") {
+          return findAnchor(element.parentElement);
+        } else if (element.nodeName === "BODY") {
+          return false;
+        } else {
+          return element;
+        }
+      }
+
+      element = findAnchor(e.srcElement);
+
       tooltip.innerHTML = `
-    <div>Link ${i}</div>`;
-      console.log(e.srcElement.getAttribute("aria-label"));
+    <div>Link ${i}</div>
+    <div>aria-label: ${element.getAttribute("aria-label") ? "✔️" : "❌"}</div>`;
+
+      tooltip.style.display = "flex";
+      console.log(element.getAttribute("aria-label"));
+      console.log(e.srcElement);
+      console.log(e);
     };
 
     link.onmouseout = function (e) {
@@ -109,11 +138,19 @@ function hover() {
   });
 
   window.onmousemove = function (e) {
-    // tooltip.style.display = "block";
     let x = e.clientX,
       y = e.clientY;
-    tooltip.style.top = y + 20 + "px";
-    tooltip.style.left = x + 20 + "px";
+    if (x > window.innerWidth - 300) {
+      tooltip.style.left = x - 220 + "px";
+    } else {
+      tooltip.style.left = x + 20 + "px";
+    }
+
+    if (y > window.innerHeight - 200) {
+      tooltip.style.top = y - 120 + "px";
+    } else {
+      tooltip.style.top = y + 20 + "px";
+    }
   };
 
   exitButton.addEventListener("click", () => {
@@ -142,6 +179,7 @@ function addConfirmation() {
   confirmBox.style.width = "125px";
   confirmBox.style.height = "50px";
   confirmBox.style.zIndex = "10000";
+  confirmBox.style.color = "black";
   confirmBox.style.fontWeight = "bold";
   confirmBox.style.boxShadow = `
   2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
