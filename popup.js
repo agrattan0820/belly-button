@@ -31,9 +31,13 @@ function hover() {
 
   let buttons = document.getElementsByTagName("button");
   let anchors = document.getElementsByTagName("a");
+  let divs = document.getElementsByTagName("div");
 
   buttons = [...buttons];
   anchors = [...anchors];
+  divs = [...divs];
+
+  console.log(divs);
 
   tooltip.id = "tooltip";
 
@@ -48,6 +52,9 @@ function hover() {
   tooltip.style.height = "100px";
   tooltip.style.zIndex = "10000";
   tooltip.style.color = "black";
+  tooltip.style.padding = "1rem";
+  tooltip.style.boxSizing = "border-box";
+  tooltip.style.fontWeight = "normal";
   tooltip.style.boxShadow = `
   2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
   6px 6px 10px rgba(0, 0, 0, 0.035),
@@ -69,6 +76,8 @@ function hover() {
   exitButton.style.color = "black";
   exitButton.style.border = "none";
   exitButton.style.outline = "none";
+  exitButton.style.fontWeight = "normal";
+  exitButton.style.boxSizing = "border-box";
   exitButton.style.boxShadow = `
   2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
   6px 6px 10px rgba(0, 0, 0, 0.035),
@@ -135,6 +144,42 @@ function hover() {
     link.onmouseout = function (e) {
       tooltip.style.display = "none";
     };
+  });
+
+  divs.forEach((div, i) => {
+    console.log(div.getAttribute("role"));
+    if (div.getAttribute("role") === "button") {
+      div.onmouseover = function (e) {
+        let element;
+
+        function findDiv(element) {
+          if (element.nodeName !== "DIV") {
+            return findDiv(element.parentElement);
+          } else if (element.nodeName === "BODY") {
+            return false;
+          } else {
+            return element;
+          }
+        }
+
+        element = findDiv(e.srcElement);
+
+        tooltip.innerHTML = `
+    <div>This is a div with role="button"</div> 
+    <div>That's a no-no ❌</div>`;
+
+        tooltip.style.display = "flex";
+        tooltip.style.width = "300px";
+        console.log(element.getAttribute("aria-label"));
+        console.log(e.srcElement);
+        console.log(e);
+      };
+
+      div.onmouseout = function (e) {
+        tooltip.style.display = "none";
+        tooltip.style.width = "200px";
+      };
+    }
   });
 
   window.onmousemove = function (e) {
