@@ -23,11 +23,21 @@ async function getCurrentTab() {
 }
 
 function hover() {
+  const prevTooltip = document.querySelector("#bellyButtonTooltip");
+  const prevExitButton = document.querySelector("#bellyButtonExit");
+  const prevSidebar = document.querySelector("#bellyButtonSidebar");
+
+  prevTooltip && prevTooltip.remove();
+  prevExitButton && prevExitButton.remove();
+  prevSidebar && prevSidebar.remove();
+
   let tooltip;
   let exitButton;
+  let sidebar;
 
   tooltip = document.createElement("div");
   exitButton = document.createElement("button");
+  sidebar = document.createElement("div");
 
   let buttons = document.getElementsByTagName("button");
   let anchors = document.getElementsByTagName("a");
@@ -37,9 +47,11 @@ function hover() {
   anchors = [...anchors];
   divs = [...divs];
 
-  console.log(divs);
+  tooltip.id = "bellyButtonTooltip";
+  exitButton.id = "bellyButtonExit";
+  sidebar.id = "bellyButtonSidebar";
 
-  tooltip.id = "tooltip";
+  console.log(exitButton.id);
 
   tooltip.style.display = "none";
   tooltip.style.alignItems = "center";
@@ -62,8 +74,6 @@ function hover() {
   48px 48px 80px rgba(0, 0, 0, 0.07)
 `;
   tooltip.textContent = "Hello there";
-
-  exitButton.id = "exitButton";
 
   exitButton.style.position = "fixed";
   exitButton.style.top = "8px";
@@ -105,7 +115,6 @@ function hover() {
       tooltip.innerHTML = `
     <div>Button ${i}</div>
     <div>aria-label: ${element.getAttribute("aria-label") ? "✔️" : "❌"}</div>`;
-      console.log(element.getAttribute("aria-label"));
     };
 
     tooltip.style.display = "flex";
@@ -136,9 +145,6 @@ function hover() {
     <div>aria-label: ${element.getAttribute("aria-label") ? "✔️" : "❌"}</div>`;
 
       tooltip.style.display = "flex";
-      console.log(element.getAttribute("aria-label"));
-      console.log(e.srcElement);
-      console.log(e);
     };
 
     link.onmouseout = function (e) {
@@ -147,7 +153,6 @@ function hover() {
   });
 
   divs.forEach((div, i) => {
-    console.log(div.getAttribute("role"));
     if (div.getAttribute("role") === "button") {
       div.onmouseover = function (e) {
         let element;
@@ -170,9 +175,6 @@ function hover() {
 
         tooltip.style.display = "flex";
         tooltip.style.width = "300px";
-        console.log(element.getAttribute("aria-label"));
-        console.log(e.srcElement);
-        console.log(e);
       };
 
       div.onmouseout = function (e) {
@@ -201,10 +203,12 @@ function hover() {
   exitButton.addEventListener("click", () => {
     tooltip.remove();
     exitButton.remove();
+    sidebar.remove();
   });
 
   document.body.append(tooltip);
   document.body.append(exitButton);
+  document.body.append(sidebar);
 }
 
 function addConfirmation() {
