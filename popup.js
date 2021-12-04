@@ -51,12 +51,12 @@ function hover() {
   exitButton.id = "bellyButtonExit";
   sidebar.id = "bellyButtonSidebar";
 
-  console.log(exitButton.id);
-
   tooltip.style.display = "none";
-  tooltip.style.alignItems = "center";
+  tooltip.style.alignItems = "start";
   tooltip.style.justifyContent = "center";
   tooltip.style.flexDirection = "column";
+  tooltip.style.textAlign = "left";
+  tooltip.style.gap = ".5rem";
   tooltip.style.position = "fixed";
   tooltip.style.backgroundColor = "papayawhip";
   tooltip.style.borderRadius = "20px";
@@ -64,7 +64,8 @@ function hover() {
   tooltip.style.height = "100px";
   tooltip.style.zIndex = "10000";
   tooltip.style.color = "black";
-  tooltip.style.padding = "1rem";
+  tooltip.style.padding = "2rem";
+  tooltip.style.textAlign = "left";
   tooltip.style.boxSizing = "border-box";
   tooltip.style.fontWeight = "normal";
   tooltip.style.boxShadow = `
@@ -73,7 +74,6 @@ function hover() {
   14.5px 14.5px 24.1px rgba(0, 0, 0, 0.046),
   48px 48px 80px rgba(0, 0, 0, 0.07)
 `;
-  tooltip.textContent = "Hello there";
 
   exitButton.style.position = "fixed";
   exitButton.style.top = "8px";
@@ -110,14 +110,23 @@ function hover() {
         }
       }
 
+      console.log(e);
+
       element = findButton(e.srcElement);
 
-      tooltip.innerHTML = `
-    <div>Button ${i}</div>
-    <div>aria-label: ${element.getAttribute("aria-label") ? "✔️" : "❌"}</div>`;
-    };
+      // console.log(element);
 
-    tooltip.style.display = "flex";
+      const nodeArray = Array.from(element.childNodes);
+
+      tooltip.innerHTML = `
+    <div style='font-weight: bold'>Button &lt;button&gt;</div>
+    <div>aria-label: ${element.getAttribute("aria-label") ? "✔️" : "❌"}</div>
+    <div>Icon button: ${
+      !nodeArray.some((child) => child.nodeType === 3) ? "✔️" : "❌"
+    }</div>`;
+
+      tooltip.style.display = "flex";
+    };
 
     button.onmouseout = function (e) {
       tooltip.style.display = "none";
@@ -138,11 +147,21 @@ function hover() {
         }
       }
 
+      console.log(e);
+
       element = findAnchor(e.srcElement);
 
+      const nodeArray = Array.from(element.childNodes);
+
+      // console.log(element);
+
       tooltip.innerHTML = `
-    <div>Link ${i}</div>
-    <div>aria-label: ${element.getAttribute("aria-label") ? "✔️" : "❌"}</div>`;
+    <div style='font-weight: bold'>Link &lt;a&gt;</div>
+    <div>aria-label: ${element.getAttribute("aria-label") ? "✔️" : "❌"}</div>
+        <div>Icon button: ${
+          !nodeArray.some((child) => child.nodeType === 3) ? "✔️" : "❌"
+        }</div>
+    `;
 
       tooltip.style.display = "flex";
     };
