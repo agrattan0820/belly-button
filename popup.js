@@ -1,20 +1,6 @@
-//  "content_scripts": [
-//   {
-//    "matches": ["<all_urls>"],
-//    "js": ["script.js"],
-//    "css": ["styles.css"]
-//   }
-//  ],
-// "action": {
-//   "default_popup": "popup.html",
-//   "default_icon": {
-//   "16": "/images/favicon-16x16.png",
-//   "32": "/images/favicon-32x32.png"
-//   }
-// },
-
 const titleButton = document.querySelector("#titleButton");
 const inspectButton = document.querySelector("#inspectButton");
+const uxCheckButton = document.querySelector("#uxCheckButton");
 
 async function getCurrentTab() {
   let queryOptions = { active: true, currentWindow: true };
@@ -51,49 +37,6 @@ function hover() {
   exitButton.id = "bellyButtonExit";
   sidebar.id = "bellyButtonSidebar";
 
-  tooltip.style.display = "none";
-  tooltip.style.alignItems = "start";
-  tooltip.style.justifyContent = "center";
-  tooltip.style.flexDirection = "column";
-  tooltip.style.textAlign = "left";
-  tooltip.style.gap = ".5rem";
-  tooltip.style.position = "fixed";
-  tooltip.style.backgroundColor = "papayawhip";
-  tooltip.style.borderRadius = "20px";
-  tooltip.style.width = "200px";
-  tooltip.style.height = "100px";
-  tooltip.style.zIndex = "10000";
-  tooltip.style.color = "black";
-  tooltip.style.padding = "2rem";
-  tooltip.style.textAlign = "left";
-  tooltip.style.boxSizing = "border-box";
-  tooltip.style.fontWeight = "normal";
-  tooltip.style.boxShadow = `
-  2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
-  6px 6px 10px rgba(0, 0, 0, 0.035),
-  14.5px 14.5px 24.1px rgba(0, 0, 0, 0.046),
-  48px 48px 80px rgba(0, 0, 0, 0.07)
-`;
-
-  exitButton.style.position = "fixed";
-  exitButton.style.top = "8px";
-  exitButton.style.right = "16px";
-  exitButton.style.backgroundColor = "papayawhip";
-  exitButton.style.borderRadius = "10px";
-  exitButton.style.width = "125px";
-  exitButton.style.height = "50px";
-  exitButton.style.zIndex = "10000";
-  exitButton.style.color = "black";
-  exitButton.style.border = "none";
-  exitButton.style.outline = "none";
-  exitButton.style.fontWeight = "normal";
-  exitButton.style.boxSizing = "border-box";
-  exitButton.style.boxShadow = `
-  2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
-  6px 6px 10px rgba(0, 0, 0, 0.035),
-  14.5px 14.5px 24.1px rgba(0, 0, 0, 0.046),
-  48px 48px 80px rgba(0, 0, 0, 0.07)
-`;
   exitButton.textContent = "Exit Inspect";
 
   buttons.forEach((button, i) => {
@@ -235,29 +178,7 @@ function addConfirmation() {
 
   confirmBox = document.createElement("div");
 
-  confirmBox.style.display = "flex";
-  confirmBox.style.alignItems = "center";
-  confirmBox.style.justifyContent = "center";
-  confirmBox.style.position = "fixed";
-  confirmBox.style.backgroundColor = "mediumseagreen";
-  confirmBox.style.borderRadius = "20px";
-  confirmBox.style.top = "8px";
-  confirmBox.style.left = "50%";
-  confirmBox.style.transform = "translate(-50%)";
-  confirmBox.style.width = "125px";
-  confirmBox.style.height = "50px";
-  confirmBox.style.zIndex = "10000";
-  confirmBox.style.color = "black";
-  confirmBox.style.fontWeight = "bold";
-  confirmBox.style.boxShadow = `
-  2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
-  6px 6px 10px rgba(0, 0, 0, 0.035),
-  14.5px 14.5px 24.1px rgba(0, 0, 0, 0.046),
-  48px 48px 80px rgba(0, 0, 0, 0.07)
-`;
-  confirmBox.style.transitionProperty = "opacity";
-  confirmBox.style.transitionDuration = "150ms";
-  confirmBox.style.transitionTimingFunction = "cubic-bezier(0.4, 0, 0.2, 1);";
+  confirmBox.id = "bellyButtonConfirm";
   confirmBox.textContent = "Added! ✔️";
 
   document.body.append(confirmBox);
@@ -270,11 +191,36 @@ function addConfirmation() {
   }, 3000);
 }
 
+function sidebar() {
+  let confirmBox;
+
+  confirmBox = document.createElement("div");
+
+  const bodyElement = document.body;
+
+  console.log(bodyElement);
+
+  bodyElement.setAttribute(
+    "style",
+    "margin-left: 400px !important; width: calc(100% - 400px) !important; position: absolute !important; overflow: scroll !important; cursor: pointer !important;"
+  );
+
+  confirmBox.innerHTML = `
+    <div id="bellyButtonSidebar">Hola</div>
+  `;
+
+  document.body.append(confirmBox);
+}
+
 titleButton.addEventListener("click", async () => {
   const tab = await getCurrentTab();
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     files: ["addTitle.js"],
+  });
+  chrome.scripting.insertCSS({
+    target: { tabId: tab.id },
+    files: ["confirm.css"],
   });
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
@@ -285,9 +231,26 @@ titleButton.addEventListener("click", async () => {
 
 inspectButton.addEventListener("click", async () => {
   const tab = await getCurrentTab();
+  chrome.scripting.insertCSS({
+    target: { tabId: tab.id },
+    files: ["hover.css"],
+  });
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     func: hover,
+  });
+  window.close();
+});
+
+uxCheckButton.addEventListener("click", async () => {
+  const tab = await getCurrentTab();
+  chrome.scripting.insertCSS({
+    target: { tabId: tab.id },
+    files: ["sidebar.css"],
+  });
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: sidebar,
   });
   window.close();
 });

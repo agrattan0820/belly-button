@@ -1,0 +1,40 @@
+#bellyButtonTooltip {
+  display: none;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+  gap: 0.5rem;
+  position: fixed;
+  background-color: papayawhip;
+  border-radius: 20px;
+  width: 200px;
+  min-height: 100px;
+  z-index: 1000000;
+  color: black;
+  padding: 2rem;
+  box-sizing: border-box;
+  font-weight: normal;
+  box-shadow: 2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
+    6px 6px 10px rgba(0, 0, 0, 0.035), 14.5px 14.5px 24.1px rgba(0, 0, 0, 0.046),
+    48px 48px 80px rgba(0, 0, 0, 0.07);
+}
+
+#bellyButtonExit {
+  position: fixed;
+  top: 8px;
+  right: 16px;
+  background-color: papayawhip;
+  border-radius: 10px;
+  width: 125px;
+  height: 50px;
+  z-index: 1000000;
+  color: black;
+  border: none;
+  outline: none;
+  font-weight: normal;
+  box-sizing: border-box;
+  box-shadow: 2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
+    6px 6px 10px rgba(0, 0, 0, 0.035), 14.5px 14.5px 24.1px rgba(0, 0, 0, 0.046),
+    48px 48px 80px rgba(0, 0, 0, 0.07);
+}

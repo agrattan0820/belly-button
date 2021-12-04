@@ -1,0 +1,26 @@
+body {
+  margin-left: 400px !important;
+  width: calc(100% - 400px) !important;
+  position: absolute !important;
+  cursor: pointer !important;
+}
+
+#bellyButtonSidebar {
+  font-size: 16px !important;
+  font-family: Roboto, sans-serif !important;
+  font-weight: 300 !important;
+  float: left !important;
+  display: inline-block !important;
+  width: 397px !important;
+  height: 100% !important;
+  overflow-y: scroll !important;
+  background-color: papayawhip !important;
+  position: fixed !important;
+  left: 0px !important;
+  top: 0px !important;
+  cursor: default !important;
+  z-index: 2000000020 !important;
+  box-shadow: rgb(0, 0, 0) 0px 0px 22px -6px !important;
+  color: black !important;
+  border-right: 3px solid papayawhip !important;
+}
