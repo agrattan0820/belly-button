@@ -232,13 +232,13 @@ function sidebarClose() {
   const sidebarClose = document.getElementById("bellyButtonSidebarClose");
   const sidebarElement = document.getElementById("bellyButtonSidebar");
   const toolTip = document.getElementById("bellyButtonTooltip");
-  const exitButton = document.getElementById("bellyButtonExit");
+  // const exitButton = document.getElementById("bellyButtonExit");
 
   sidebarClose.addEventListener("click", async () => {
     sidebarElement.remove();
     toolTip.remove();
-    exitButton.remove();
-    document.body.setAttribute("style", " ");
+    // exitButton.remove();
+    document.body.setAttribute("style", "");
     console.log("Ran remove!");
   });
 }
