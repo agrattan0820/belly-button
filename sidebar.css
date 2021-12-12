@@ -176,62 +176,64 @@ body {
 }
 
 #bellyButtonSidebarMain h2 {
-  font-size: 3.5rem;
-  display: block;
-  vertical-align: middle;
-  line-height: 1.15;
+  font-size: 3.5rem !important;
+  display: block !important;
+  vertical-align: middle !important;
+  line-height: 1.15 !important;
 }
 
 #bellyButtonWithinText {
-  background-color: lightsalmon;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: bold;
-  width: 150px;
-  height: 50px;
-  vertical-align: middle;
+  background-color: lightsalmon !important;
+  border-radius: 10px !important;
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  width: 150px !important;
+  height: 50px !important;
+  vertical-align: middle !important;
   box-shadow: 2.2px 2.2px 3.6px rgba(0, 0, 0, 0.024),
     6px 6px 10px rgba(0, 0, 0, 0.035), 14.5px 14.5px 24.1px rgba(0, 0, 0, 0.046),
-    48px 48px 80px rgba(0, 0, 0, 0.07);
+    48px 48px 80px rgba(0, 0, 0, 0.07) !important;
+  border: none !important;
+  outline: none !important;
 }
 
 #bellyButtonSidebarList {
-  display: flex;
-  flex-direction: column;
-  font-size: 1.5rem;
-  font-weight: bold;
-  gap: 2rem;
-  padding: 2rem;
+  display: flex !important;
+  flex-direction: column !important;
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  gap: 2rem !important;
+  padding: 2rem !important;
 }
 
 #bellyButtonSidebarList li p {
-  font-size: 1rem;
-  font-weight: normal;
-  padding-top: 0.5rem;
-  line-height: 1.5;
+  font-size: 1rem !important;
+  font-weight: normal !important;
+  padding-top: 0.5rem !important;
+  line-height: 1.5 !important;
 }
 
 #bellyButtonSidebarList li a {
-  font-size: 1rem;
-  font-weight: normal;
-  padding-top: 0.5rem;
-  line-height: 1.5;
-  color: lightsalmon;
+  font-size: 1rem !important;
+  font-weight: normal !important;
+  padding-top: 0.5rem !important;
+  line-height: 1.5 !important;
+  color: lightsalmon !important;
 }
 
 #bellyButtonSidebarList li div {
-  font-size: 1rem;
-  font-weight: normal;
-  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  background-color: rgb(43, 43, 43);
-  padding: 1rem;
-  color: whitesmoke;
-  border-radius: 10px;
-  text-align: left;
-  word-spacing: normal;
-  word-break: normal;
-  overflow-wrap: normal;
-  line-height: 1.5;
-  tab-size: 4;
-  hyphens: none;
+  font-size: 1rem !important;
+  font-weight: normal !important;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace !important;
+  background-color: rgb(43, 43, 43) !important;
+  padding: 1rem !important;
+  color: whitesmoke !important;
+  border-radius: 10px !important;
+  text-align: left !important;
+  word-spacing: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  line-height: 1.5 !important;
+  tab-size: 4 !important;
+  hyphens: none !important;
 }
