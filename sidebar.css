@@ -24,3 +24,12 @@ body {
   color: black !important;
   border-right: 3px solid papayawhip !important;
 }
+
+#bellyButtonSidebarClose {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  background: none;
+  outline: none;
+  border: none;
+}

@@ -19,11 +19,9 @@ function hover() {
 
   let tooltip;
   let exitButton;
-  let sidebar;
 
   tooltip = document.createElement("div");
   exitButton = document.createElement("button");
-  sidebar = document.createElement("div");
 
   let buttons = document.getElementsByTagName("button");
   let anchors = document.getElementsByTagName("a");
@@ -35,7 +33,6 @@ function hover() {
 
   tooltip.id = "bellyButtonTooltip";
   exitButton.id = "bellyButtonExit";
-  sidebar.id = "bellyButtonSidebar";
 
   exitButton.textContent = "Exit Inspect";
 
@@ -165,12 +162,10 @@ function hover() {
   exitButton.addEventListener("click", () => {
     tooltip.remove();
     exitButton.remove();
-    sidebar.remove();
   });
 
   document.body.append(tooltip);
   document.body.append(exitButton);
-  document.body.append(sidebar);
 }
 
 function addConfirmation() {
@@ -192,24 +187,45 @@ function addConfirmation() {
 }
 
 function sidebar() {
-  let confirmBox;
+  let sidebarElement;
 
-  confirmBox = document.createElement("div");
+  sidebarElement = document.createElement("div");
 
   const bodyElement = document.body;
 
-  console.log(bodyElement);
+  const sidebarClose = document.getElementById("bellyButtonSidebarClose");
+
+  // sidebarClose.addEventListener("click", () => {
+  //   document.body.removeChild(sidebarElement);
+  //   console.log("Ran remove!");
+  // });
 
   bodyElement.setAttribute(
     "style",
     "margin-left: 400px !important; width: calc(100% - 400px) !important; position: absolute !important; overflow: scroll !important; cursor: pointer !important;"
   );
 
-  confirmBox.innerHTML = `
-    <div id="bellyButtonSidebar">Hola</div>
+  sidebarElement.innerHTML = `
+    <div id="bellyButtonSidebar">
+      <button id="bellyButtonSidebarClose">❌</button>
+      <h1>Belly Button</h1>
+
+    </div>
   `;
 
-  document.body.append(confirmBox);
+  document.body.append(sidebarElement);
+}
+
+function sidebarClose() {
+  const sidebarClose = document.getElementById("bellyButtonSidebarClose");
+  const sidebarElement = document.getElementById("bellyButtonSidebar");
+
+  sidebarClose.addEventListener("click", () => {
+    sidebarElement.remove();
+    console.log("Ran remove!");
+  });
+
+  document.body.setAttribute("style", "");
 }
 
 titleButton.addEventListener("click", async () => {
@@ -251,6 +267,10 @@ uxCheckButton.addEventListener("click", async () => {
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     func: sidebar,
+  });
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: sidebarClose,
   });
   window.close();
 });
