@@ -1,6 +1,5 @@
 const titleButton = document.querySelector("#titleButton");
 const inspectButton = document.querySelector("#inspectButton");
-const uxCheckButton = document.querySelector("#uxCheckButton");
 
 async function getCurrentTab() {
   let queryOptions = { active: true, currentWindow: true };
@@ -200,10 +199,28 @@ function sidebar() {
 
   sidebarElement.innerHTML = `
     <div id="bellyButtonSidebar">
+      <div id="bellyButtonSidebarHeader"> 
+      <h1 id="bellyButtonSidebarTitle">🦖  Belly Button</h1>
       <button id="bellyButtonSidebarClose">❌</button>
-      <h1>Belly Button</h1>
+      </div>
       <div id="bellyButtonSidebarMain">
-        <h2>What makes up a good <button>button</button>?</h2>
+        <h2>What makes up a good <button id="bellyButtonWithinText">Button</button> ?</h2>
+        <ol id="bellyButtonSidebarList">
+          <li>
+          <h3>aria-label</h3>
+            <p>
+            An HTML attribute that labels elements on a page for accessiblity tools such as screen readers. Should be used for icon buttons and when a textual indication needs to be provided to users who use on assitive technology. <a href="https://www.w3.org/TR/wai-aria/#aria-label">(Reference)</a>
+            </p>
+            <div>&lt;button aria-label="Menu" &gt;...&lt;/button&gt;</div>
+          </li>
+          <li>
+          <h3>aria-label</h3>
+            <p>
+            An HTML attribute that labels elements on a page for accessiblity tools such as screen readers. Should be used for icon buttons and when a textual indication needs to be provided to users who use on assitive technology. <a href="https://www.w3.org/TR/wai-aria/#aria-label">(Reference)</a>
+            </p>
+            <div>&lt;button aria-label="Menu" &gt;...&lt;/button&gt;</div>
+          </li>
+        </ol>
       </div>
     </div>
   `;
@@ -265,11 +282,5 @@ inspectButton.addEventListener("click", async () => {
     target: { tabId: tab.id },
     func: sidebarClose,
   });
-  window.close();
-});
-
-uxCheckButton.addEventListener("click", async () => {
-  const tab = await getCurrentTab();
-
   window.close();
 });
