@@ -193,13 +193,6 @@ function sidebar() {
 
   const bodyElement = document.body;
 
-  const sidebarClose = document.getElementById("bellyButtonSidebarClose");
-
-  // sidebarClose.addEventListener("click", () => {
-  //   document.body.removeChild(sidebarElement);
-  //   console.log("Ran remove!");
-  // });
-
   bodyElement.setAttribute(
     "style",
     "margin-left: 400px !important; width: calc(100% - 400px) !important; position: absolute !important; overflow: scroll !important; cursor: pointer !important;"
@@ -209,7 +202,9 @@ function sidebar() {
     <div id="bellyButtonSidebar">
       <button id="bellyButtonSidebarClose">❌</button>
       <h1>Belly Button</h1>
-
+      <div id="bellyButtonSidebarMain">
+        <h2>What makes up a good <button>button</button>?</h2>
+      </div>
     </div>
   `;
 
@@ -219,13 +214,16 @@ function sidebar() {
 function sidebarClose() {
   const sidebarClose = document.getElementById("bellyButtonSidebarClose");
   const sidebarElement = document.getElementById("bellyButtonSidebar");
+  const toolTip = document.getElementById("bellyButtonTooltip");
+  const exitButton = document.getElementById("bellyButtonExit");
 
-  sidebarClose.addEventListener("click", () => {
+  sidebarClose.addEventListener("click", async () => {
     sidebarElement.remove();
+    toolTip.remove();
+    exitButton.remove();
+    document.body.setAttribute("style", " ");
     console.log("Ran remove!");
   });
-
-  document.body.setAttribute("style", "");
 }
 
 titleButton.addEventListener("click", async () => {
@@ -255,11 +253,6 @@ inspectButton.addEventListener("click", async () => {
     target: { tabId: tab.id },
     func: hover,
   });
-  window.close();
-});
-
-uxCheckButton.addEventListener("click", async () => {
-  const tab = await getCurrentTab();
   chrome.scripting.insertCSS({
     target: { tabId: tab.id },
     files: ["sidebar.css"],
@@ -272,5 +265,11 @@ uxCheckButton.addEventListener("click", async () => {
     target: { tabId: tab.id },
     func: sidebarClose,
   });
+  window.close();
+});
+
+uxCheckButton.addEventListener("click", async () => {
+  const tab = await getCurrentTab();
+
   window.close();
 });
