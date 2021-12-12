@@ -8,7 +8,7 @@
   position: fixed;
   background-color: papayawhip;
   border-radius: 20px;
-  width: 200px;
+  min-width: 200px;
   min-height: 100px;
   z-index: 1000000;
   color: black;
