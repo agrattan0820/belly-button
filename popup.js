@@ -9,18 +9,18 @@ async function getCurrentTab() {
 
 function hover() {
   const prevTooltip = document.querySelector("#bellyButtonTooltip");
-  const prevExitButton = document.querySelector("#bellyButtonExit");
+  // const prevExitButton = document.querySelector("#bellyButtonExit");
   const prevSidebar = document.querySelector("#bellyButtonSidebar");
 
   prevTooltip && prevTooltip.remove();
-  prevExitButton && prevExitButton.remove();
+  // prevExitButton && prevExitButton.remove();
   prevSidebar && prevSidebar.remove();
 
   let tooltip;
   let exitButton;
 
   tooltip = document.createElement("div");
-  exitButton = document.createElement("button");
+  // exitButton = document.createElement("button");
 
   let buttons = document.getElementsByTagName("button");
   let anchors = document.getElementsByTagName("a");
@@ -31,9 +31,9 @@ function hover() {
   divs = [...divs];
 
   tooltip.id = "bellyButtonTooltip";
-  exitButton.id = "bellyButtonExit";
+  // exitButton.id = "bellyButtonExit";
 
-  exitButton.textContent = "Exit Inspect";
+  // exitButton.textContent = "Exit Inspect";
 
   buttons.forEach((button, i) => {
     button.onmouseover = function (e) {
@@ -158,13 +158,13 @@ function hover() {
     }
   };
 
-  exitButton.addEventListener("click", () => {
-    tooltip.remove();
-    exitButton.remove();
-  });
+  // exitButton.addEventListener("click", () => {
+  //   tooltip.remove();
+  //   exitButton.remove();
+  // });
 
   document.body.append(tooltip);
-  document.body.append(exitButton);
+  // document.body.append(exitButton);
 }
 
 function addConfirmation() {
