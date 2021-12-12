@@ -141,32 +141,31 @@ body {
   top: 0px !important;
   cursor: default !important;
   z-index: 2000000020 !important;
-  padding: 1rem;
-  border-radius: 0px 20px 20px 0px;
+  padding: 1rem !important;
+  border-radius: 0px 20px 20px 0px !important;
   box-shadow: rgb(0, 0, 0) 0px 0px 22px -6px !important;
   color: black !important;
   /* border-right: 3px solid papayawhip !important; */
 }
 
 #bellyButtonSidebarHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
 }
 
 #bellyButtonSidebarTitle {
-  font-size: 1.25rem;
+  font-size: 1.25rem !important;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+  font-weight: bold !important;
 }
 
 #bellyButtonSidebar::-webkit-scrollbar {
-  width: 1em;
-  display: none;
+  width: 1em !important;
+  display: none !important;
 }
 
 #bellyButtonSidebarClose {
-  /* position: absolute;
-  right: 16px;
-  top: 16px; */
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
@@ -179,7 +178,8 @@ body {
 }
 
 #bellyButtonSidebarMain {
-  padding: 2rem 0;
+  padding: 2rem 0 !important;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
 #bellyButtonSidebarMain h2 {
@@ -187,6 +187,8 @@ body {
   display: block !important;
   vertical-align: middle !important;
   line-height: 1.15 !important;
+  font-weight: bold !important;
+  margin: 0 !important;
 }
 
 #bellyButtonWithinText {
@@ -211,12 +213,14 @@ body {
   font-weight: bold !important;
   gap: 2rem !important;
   padding: 2rem !important;
+  list-style-type: decimal !important;
 }
 
 #bellyButtonSidebarList li p {
   font-size: 1rem !important;
   font-weight: normal !important;
-  padding-top: 0.5rem !important;
+  padding: 0.5rem 0rem 1rem 0rem !important;
+  margin: 0 !important;
   line-height: 1.5 !important;
 }
 
@@ -226,6 +230,7 @@ body {
   padding-top: 0.5rem !important;
   line-height: 1.5 !important;
   color: mediumseagreen !important;
+  text-decoration: underline !important;
 }
 
 #bellyButtonSidebarList li div {
@@ -249,12 +254,58 @@ body {
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace !important;
 }
 
+.bad-button {
+  color: black !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: #efefef !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 0.75rem !important;
+  border: none !important;
+  outline: none !important;
+}
+
 .good-button {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+  font-size: 0.9rem !important;
   background-color: lightsalmon !important;
+  color: black !important;
   font-weight: bold !important;
   padding: 0.5rem 1rem !important;
   min-width: 100px !important;
   min-height: 50px !important;
   border-radius: 10px !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.slide-right {
+  -webkit-animation: slide-right 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-right 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  /* transition-property: opacity;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); */
+}
+
+@-webkit-keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(-400px);
+    transform: translateX(-400px);
+  }
+  100% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+@keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(-400px);
+    transform: translateX(-400px);
+  }
+  100% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
 }

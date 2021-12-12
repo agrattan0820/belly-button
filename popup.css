@@ -128,16 +128,16 @@ body {
   height: 250px;
   width: 400px;
   padding: 1rem;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
 #toolbar {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
 #toolbar button {
   padding: 0.5rem 1rem;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
   border: none;
   outline: none;
   border-radius: 10px;
@@ -159,7 +159,7 @@ body {
 .title {
   margin-bottom: 0.5rem;
   font-size: 1.5rem;
-  font-family: "Nunito", sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
 
   font-weight: 900 !important;
 }

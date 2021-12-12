@@ -66,11 +66,11 @@ function hover() {
       !nodeArray.some((child) => child.nodeType === 3) ? "✔️" : "❌"
     }</div>`;
 
-      tooltip.style.display = "flex";
+      tooltip.style.opacity = "100";
     };
 
     button.onmouseout = function (e) {
-      tooltip.style.display = "none";
+      tooltip.style.opacity = "0";
     };
   });
 
@@ -105,11 +105,11 @@ function hover() {
         }</div>
     `;
 
-      tooltip.style.display = "flex";
+      tooltip.style.opacity = "100";
     };
 
     link.onmouseout = function (e) {
-      tooltip.style.display = "none";
+      tooltip.style.opacity = "0";
     };
   });
 
@@ -134,13 +134,11 @@ function hover() {
     <div>This is a div with role="button"</div> 
     <div>That's a no-no ❌</div>`;
 
-        tooltip.style.display = "flex";
-        tooltip.style.width = "300px";
+        tooltip.style.opacity = "100";
       };
 
       div.onmouseout = function (e) {
-        tooltip.style.display = "none";
-        tooltip.style.width = "200px";
+        tooltip.style.opacity = "0";
       };
     }
   });
@@ -201,7 +199,7 @@ function sidebar() {
   );
 
   sidebarElement.innerHTML = `
-    <div id="bellyButtonSidebar">
+    <div id="bellyButtonSidebar" class="slide-right">
       <div id="bellyButtonSidebarHeader"> 
       <h1 id="bellyButtonSidebarTitle">🦖  Belly Button</h1>
       <button id="bellyButtonSidebarClose" type="button" aria-label="Close Belly Button Sidebar"><svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -242,7 +240,7 @@ function sidebar() {
             <p>
               Fitt's Law is a usability law that states that the time to acquire a target is a function of the distance to and size of the target, meaning, a button is easier to press the larger it is. The standard minimum size for buttons on websites is 44x44 pixels, this is so that the button can easily be accessed by mobile users who need large touch targets. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#size_and_proximity">(Reference)</a>
             </p>
-            <div><button>I'm a bad button</button> <button class="good-button" type="button" aria-label="Example of a good button">I'm a good button</button></div>
+            <div><button class="bad-button">I'm a bad button</button> <button class="good-button" type="button" aria-label="Example of a good button">I'm a good button</button></div>
           </li>
         </ol>
       </div>
