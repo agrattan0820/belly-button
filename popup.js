@@ -58,8 +58,10 @@ function hover() {
       const nodeArray = Array.from(element.childNodes);
 
       tooltip.innerHTML = `
-    <div style='font-weight: bold'>Button &lt;button&gt;</div>
+    <div style='font-weight: bold'>Button <span class="code-title">&lt;button&gt;</span></div>
     <div>aria-label: ${element.getAttribute("aria-label") ? "✔️" : "❌"}</div>
+    <div>title: ${element.getAttribute("title") ? "✔️" : "❌"}</div>
+    <div>Specified Type: ${element.getAttribute("type") ? "✔️" : "❌"}</div>
     <div>Icon button: ${
       !nodeArray.some((child) => child.nodeType === 3) ? "✔️" : "❌"
     }</div>`;
@@ -95,8 +97,9 @@ function hover() {
       // console.log(element);
 
       tooltip.innerHTML = `
-    <div style='font-weight: bold'>Link &lt;a&gt;</div>
+    <div style='font-weight: bold'>Link <span class="code-title">&lt;a&gt;</span></div>
     <div>aria-label: ${element.getAttribute("aria-label") ? "✔️" : "❌"}</div>
+    <div>title: ${element.getAttribute("title") ? "✔️" : "❌"}</div>
         <div>Icon button: ${
           !nodeArray.some((child) => child.nodeType === 3) ? "✔️" : "❌"
         }</div>
@@ -201,24 +204,45 @@ function sidebar() {
     <div id="bellyButtonSidebar">
       <div id="bellyButtonSidebarHeader"> 
       <h1 id="bellyButtonSidebarTitle">🦖  Belly Button</h1>
-      <button id="bellyButtonSidebarClose">❌</button>
+      <button id="bellyButtonSidebarClose" type="button" aria-label="Close Belly Button Sidebar"><svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
       <div id="bellyButtonSidebarMain">
         <h2>What makes up a good <button id="bellyButtonWithinText">Button</button> ?</h2>
         <ol id="bellyButtonSidebarList">
           <li>
-          <h3>aria-label</h3>
+          <h3><span class="code-title">aria-label</span> for icon buttons</h3>
             <p>
-            An HTML attribute that labels elements on a page for accessiblity tools such as screen readers. Should be used for icon buttons and when a textual indication needs to be provided to users who use on assitive technology. <a href="https://www.w3.org/TR/wai-aria/#aria-label">(Reference)</a>
+            Aria-label is an HTML attribute that labels an element on a webpage so that accessiblity tools such as screen readers can parse and announce the label to the user. Should be implemented for icon buttons and when extra textual indication needs to be provided to users who use assitive technologies. <a href="https://www.w3.org/TR/wai-aria/#aria-label">(Reference)</a>
             </p>
             <div>&lt;button aria-label="Menu" &gt;...&lt;/button&gt;</div>
           </li>
           <li>
-          <h3>aria-label</h3>
+          <h3>No <span class="code-title">title</span> attribute</h3>
             <p>
-            An HTML attribute that labels elements on a page for accessiblity tools such as screen readers. Should be used for icon buttons and when a textual indication needs to be provided to users who use on assitive technology. <a href="https://www.w3.org/TR/wai-aria/#aria-label">(Reference)</a>
+              The title HTML attribute can be added to an element to display a tooltip when it is hovered over with the cursor. However, the attribute is widely inconsistent across browsers and can negatively affect assistive technology's parsing of a webpage. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/title#accessibility_concerns">(Reference)</a>
             </p>
-            <div>&lt;button aria-label="Menu" &gt;...&lt;/button&gt;</div>
+            <div>&lt;button title="Home" &gt;...&lt;/button&gt; ❌</div>
+          </li>
+          <li>
+          <h3>Specified <span class="code-title">type</span></h3>
+            <p>
+              It is good practice to specify the button as one of three options: <span class="code-title">button</span>, <span class="code-title">submit</span>, or <span class="code-title">reset</span> in order to avoid strange behavior such as accidental form submissions. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type">(Reference)</a>
+            </p>
+            <div>&lt;button type="button" &gt;...&lt;/button&gt;</div>
+          </li>
+          <li>
+          <h3>Not a <span class="code-title">div</span> with <span class="code-title">role="button"</span></h3>
+            <p>
+              Not focusable by the keyboard. Can't be clicked with the <span class="code-title">Enter</span> or <span class="code-title">Space</span> key. Don't. Just don't. <a href="https://www.htmhell.dev/2-div-with-button-role/">(Reference)</a>
+            </p>
+            <div>&lt;div role="button" &gt;...&lt;/div&gt; ❌</div>
+          </li>
+          <li>
+          <h3>Size of at least 44x44 pixels</h3>
+            <p>
+              Fitt's Law is a usability law that states that the time to acquire a target is a function of the distance to and size of the target, meaning, a button is easier to press the larger it is. The standard minimum size for buttons on websites is 44x44 pixels, this is so that the button can easily be accessed by mobile users who need large touch targets. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#size_and_proximity">(Reference)</a>
+            </p>
+            <div><button>I'm a bad button</button> <button class="good-button" type="button" aria-label="Example of a good button">I'm a good button</button></div>
           </li>
         </ol>
       </div>
@@ -266,13 +290,13 @@ inspectButton.addEventListener("click", async () => {
     target: { tabId: tab.id },
     files: ["hover.css"],
   });
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    func: hover,
-  });
   chrome.scripting.insertCSS({
     target: { tabId: tab.id },
     files: ["sidebar.css"],
+  });
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: hover,
   });
   chrome.scripting.executeScript({
     target: { tabId: tab.id },

@@ -134,6 +134,7 @@ body {
   display: inline-block !important;
   width: 397px !important;
   height: 100vh !important;
+  overflow-y: auto !important;
   background-color: papayawhip !important;
   position: fixed !important;
   left: 0px !important;
@@ -154,7 +155,7 @@ body {
 }
 
 #bellyButtonSidebarTitle {
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 #bellyButtonSidebar::-webkit-scrollbar {
@@ -166,9 +167,15 @@ body {
   /* position: absolute;
   right: 16px;
   top: 16px; */
-  background: none;
-  outline: none;
-  border: none;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  background: none !important;
+  outline: none !important;
+  border: none !important;
+  cursor: pointer !important;
 }
 
 #bellyButtonSidebarMain {
@@ -183,7 +190,7 @@ body {
 }
 
 #bellyButtonWithinText {
-  background-color: lightsalmon !important;
+  background-color: mediumseagreen !important;
   border-radius: 10px !important;
   font-size: 1rem !important;
   font-weight: bold !important;
@@ -218,7 +225,7 @@ body {
   font-weight: normal !important;
   padding-top: 0.5rem !important;
   line-height: 1.5 !important;
-  color: lightsalmon !important;
+  color: mediumseagreen !important;
 }
 
 #bellyButtonSidebarList li div {
@@ -236,4 +243,18 @@ body {
   line-height: 1.5 !important;
   tab-size: 4 !important;
   hyphens: none !important;
+}
+
+.code-title {
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace !important;
+}
+
+.good-button {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+  background-color: lightsalmon !important;
+  font-weight: bold !important;
+  padding: 0.5rem 1rem !important;
+  min-width: 100px !important;
+  min-height: 50px !important;
+  border-radius: 10px !important;
 }
